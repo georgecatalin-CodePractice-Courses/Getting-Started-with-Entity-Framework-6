@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaDomain.Classses", "NinjaDomain.Classses\NinjaDomain.Classses.csproj", "{59B7456B-D9B4-4AFC-897E-6C11734B3C2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaDomain.Classes", "NinjaDomain.Classses\NinjaDomain.Classes.csproj", "{59B7456B-D9B4-4AFC-897E-6C11734B3C2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaDomain.DataModel", "NinjaDomain.DataModel\NinjaDomain.DataModel.csproj", "{E4DDC712-A5E4-4AE7-AEE7-A21793038302}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{59B7456B-D9B4-4AFC-897E-6C11734B3C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59B7456B-D9B4-4AFC-897E-6C11734B3C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59B7456B-D9B4-4AFC-897E-6C11734B3C2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4DDC712-A5E4-4AE7-AEE7-A21793038302}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4DDC712-A5E4-4AE7-AEE7-A21793038302}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4DDC712-A5E4-4AE7-AEE7-A21793038302}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4DDC712-A5E4-4AE7-AEE7-A21793038302}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

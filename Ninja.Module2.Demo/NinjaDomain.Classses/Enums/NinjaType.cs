@@ -1,4 +1,4 @@
-﻿namespace NinjaDomain.Classses
+﻿namespace NinjaDomain.Classes
 {
 	public enum NinjaType
 	{
