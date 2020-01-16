@@ -1,5 +1,5 @@
 # Getting-Started-with-Entity-Framework-6
-Code practice associated with the course "Getting Started with Entity Framework 6" from Pluralsight (8 hrs code practice allocation)
+Code practice associated with the course "Getting Started with Entity Framework 6" from Pluralsight 
 
 > This course is part of: Entity Framework 6 Path
 
