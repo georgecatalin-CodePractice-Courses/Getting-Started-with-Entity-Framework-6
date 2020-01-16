@@ -23,9 +23,9 @@ namespace ConsoleApplication
             //DeleteNinja();
             //DeleteNinjaWithKeyValue();
             //DeleteNinjaWithSQLQuery();   
-            InsertNinjaWithEquipment();
+            //InsertNinjaWithEquipment();
+            SimpleNinjaGraphQuery();
         }
-
 
         private static void InsertNinja()
         {
@@ -226,5 +226,18 @@ namespace ConsoleApplication
                 context.SaveChanges();
             }
         }
+
+        private static void SimpleNinjaGraphQuery()
+        {
+            using (NinjaContext context=new NinjaContext())
+            {
+                //Ninja specialNinja = context.Ninjas.Include(n=>n.EquipmentOwned).FirstOrDefault(n => n.Name.Contains("Elvis"));  //DbSet.Include() for eager Loading -fetch data in advance
+
+                Ninja specialNinja = context.Ninjas.FirstOrDefault(n => n.Name.Contains("Elvis"));
+                Console.WriteLine("I found this ninja ", specialNinja.Name);
+                context.Entry(specialNinja).Collection(n => n.EquipmentOwned).Load(); // Explicit Loading
+            }
+        }
+
     }
 }
