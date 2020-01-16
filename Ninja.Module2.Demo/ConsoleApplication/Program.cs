@@ -17,7 +17,9 @@ namespace ConsoleApplication
             //InsertMultipleNinjas();
             //SimpleNinjaQueries();
             //QueryAndUpdateNinja();
-            QueryAndUpdateNinjaDisconnected();  //to work in disconnected situations -web sites, APIs, etc
+            //QueryAndUpdateNinjaDisconnected();  //to work in disconnected situations -web sites, APIs, etc
+            //RetrieveDataWithFind();
+            RetrieveDataWithSQLQuery();
         }
 
         private static void InsertNinja()
@@ -115,5 +117,36 @@ namespace ConsoleApplication
                 context.SaveChanges();
             }
         }
+
+        private static void RetrieveDataWithFind()
+        {
+            var keyval = 3;
+            using (NinjaContext context=new NinjaContext())
+            {
+                context.Database.Log = Console.WriteLine;
+                Ninja ninja = context.Ninjas.Find(keyval);
+
+                Console.WriteLine("I have found this record in database "+ninja.Name);
+
+                Ninja ninja1 = context.Ninjas.Find(keyval);
+                Console.WriteLine("I have found in memory this " + ninja1.Name);
+                ninja = null;
+            }
+        }
+
+
+        private static void RetrieveDataWithSQLQuery()
+        {
+            using (NinjaContext context=new NinjaContext())
+            {
+                context.Database.Log = Console.WriteLine;
+                var ninjas = context.Ninjas.SqlQuery("SELECT * FROM dbo.Ninjas WHERE dbo.Ninjas.Name='Ilie'");
+                foreach (var item in ninjas)
+                {
+                    Console.WriteLine(item.Name);
+                }
+            }
+        }
+
     }
 }
