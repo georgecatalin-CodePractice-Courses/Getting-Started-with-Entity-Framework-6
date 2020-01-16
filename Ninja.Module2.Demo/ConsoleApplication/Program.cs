@@ -24,7 +24,8 @@ namespace ConsoleApplication
             //DeleteNinjaWithKeyValue();
             //DeleteNinjaWithSQLQuery();   
             //InsertNinjaWithEquipment();
-            SimpleNinjaGraphQuery();
+            //SimpleNinjaGraphQuery();
+            ProjectionQuery();
         }
 
         private static void InsertNinja()
@@ -236,6 +237,16 @@ namespace ConsoleApplication
                 Ninja specialNinja = context.Ninjas.FirstOrDefault(n => n.Name.Contains("Elvis"));
                 Console.WriteLine("I found this ninja ", specialNinja.Name);
                 context.Entry(specialNinja).Collection(n => n.EquipmentOwned).Load(); // Explicit Loading
+            }
+        }
+
+
+        private static void ProjectionQuery()
+        {
+            using (NinjaContext context=new NinjaContext())
+            {
+                context.Database.Log = Console.WriteLine;
+                var query = context.Ninjas.Select(n => new { n.Name, n.ServedInOniwaban, n.EquipmentOwned }).ToList();
             }
         }
 
