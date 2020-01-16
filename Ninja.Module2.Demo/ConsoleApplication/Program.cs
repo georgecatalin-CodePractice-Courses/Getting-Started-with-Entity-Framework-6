@@ -19,8 +19,11 @@ namespace ConsoleApplication
             //QueryAndUpdateNinja();
             //QueryAndUpdateNinjaDisconnected();  //to work in disconnected situations -web sites, APIs, etc
             //RetrieveDataWithFind();
-            RetrieveDataWithSQLQuery();
-        }
+            //RetrieveDataWithSQLQuery();
+            //DeleteNinja();
+            //DeleteNinjaWithKeyValue();
+            DeleteNinjaWithSQLQuery();        }
+
 
         private static void InsertNinja()
         {
@@ -147,6 +150,49 @@ namespace ConsoleApplication
                 }
             }
         }
+
+        private static void DeleteNinja()
+        {
+            Ninja ninja;
+            using (NinjaContext context=new NinjaContext())
+            {
+                context.Database.Log = Console.WriteLine;
+                ninja = context.Ninjas.FirstOrDefault();
+                //context.Ninjas.Remove(ninja);
+                //context.SaveChanges();
+            }
+
+            using (NinjaContext context=new NinjaContext())
+            {
+                context.Database.Log = Console.WriteLine;
+                context.Entry(ninja).State = EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+
+
+        private static void DeleteNinjaWithKeyValue()
+        {
+            var keyval = 3;
+            using (NinjaContext context=new NinjaContext())
+            {
+                context.Database.Log = Console.WriteLine;
+                Ninja ninja = context.Ninjas.Find(keyval);
+                context.Ninjas.Remove(ninja);
+                context.SaveChanges();
+            }
+        }
+        
+        private static void DeleteNinjaWithSQLQuery()
+        {
+            var keyval = 2;
+            using (NinjaContext context=new NinjaContext())
+            {
+                context.Database.Log = Console.WriteLine;
+                context.Database.ExecuteSqlCommand("DELETE FROM dbo.Ninjas WHERE dbo.Ninjas.Id={0}", keyval);
+            }
+        }
+
 
     }
 }
