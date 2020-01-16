@@ -13,8 +13,9 @@ namespace ConsoleApplication
     {
         static void Main(string[] args)
         {
-            InsertNinja();
-            InsertMultipleNinjas();
+            //InsertNinja();
+            //InsertMultipleNinjas();
+            SimpleNinjaQueries();
         }
 
         private static void InsertNinja()
@@ -61,6 +62,24 @@ namespace ConsoleApplication
                 context.Ninjas.AddRange(new List<Ninja>() { ninja1, ninja2 });
                 context.SaveChanges();
             
+            }
+        }
+
+        private static void SimpleNinjaQueries()
+        { 
+            using (NinjaContext context=new NinjaContext())
+            {
+                //var ninjas=context.Ninjas.Where(n=>n.DateOfBirth>=new DateTime(1980,1,1)).OrderBy(n=>n.Name).ToList();
+
+                var ninjas = from ninja in context.Ninjas
+                             where ninja.ServedInOniwaban == false
+                             orderby ninja.Id ascending
+                             select ninja;
+
+                foreach (Ninja item in ninjas)
+                {
+                    Console.WriteLine(item.Name);
+                }
             }
         }
     }
