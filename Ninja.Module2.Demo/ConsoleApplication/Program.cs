@@ -22,7 +22,9 @@ namespace ConsoleApplication
             //RetrieveDataWithSQLQuery();
             //DeleteNinja();
             //DeleteNinjaWithKeyValue();
-            DeleteNinjaWithSQLQuery();        }
+            //DeleteNinjaWithSQLQuery();   
+            InsertNinjaWithEquipment();
+        }
 
 
         private static void InsertNinja()
@@ -194,5 +196,35 @@ namespace ConsoleApplication
         }
 
 
+        private static void InsertNinjaWithEquipment()
+        {
+            using (NinjaContext context=new NinjaContext())
+            {
+                Ninja ninja = new Ninja()
+                {
+                    Name = "Elvis",
+                    ServedInOniwaban = true,
+                    DateOfBirth = new DateTime(1977, 07, 08),
+                    ClainId = 1
+                };
+
+                NinjaEquipment fist = new NinjaEquipment()
+                {
+                    Name = "Fist",
+                    Type = EquipmentType.Weapon
+                };
+                NinjaEquipment sword = new NinjaEquipment()
+                {
+                    Name = "Sword",
+                    Type = EquipmentType.Tool
+                };
+
+                context.Database.Log = Console.WriteLine;
+                context.Ninjas.Add(ninja);
+                ninja.EquipmentOwned.Add(fist);
+                ninja.EquipmentOwned.Add(sword);
+                context.SaveChanges();
+            }
+        }
     }
 }
