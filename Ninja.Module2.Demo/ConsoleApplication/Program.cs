@@ -15,7 +15,9 @@ namespace ConsoleApplication
         {
             //InsertNinja();
             //InsertMultipleNinjas();
-            SimpleNinjaQueries();
+            //SimpleNinjaQueries();
+            //QueryAndUpdateNinja();
+            QueryAndUpdateNinjaDisconnected();  //to work in disconnected situations -web sites, APIs, etc
         }
 
         private static void InsertNinja()
@@ -80,6 +82,37 @@ namespace ConsoleApplication
                 {
                     Console.WriteLine(item.Name);
                 }
+            }
+        }
+
+        private static void QueryAndUpdateNinja()
+        {
+            using (NinjaContext context=new NinjaContext())
+            {
+                context.Database.Log = Console.WriteLine;
+                var ninja = context.Ninjas.FirstOrDefault();
+                ninja.Name = "Giorgio";
+                context.SaveChanges();
+            }
+        }
+
+        private static void QueryAndUpdateNinjaDisconnected()
+        {
+            Ninja ninja;
+            using (NinjaContext context=new NinjaContext())
+            {
+                context.Database.Log = Console.WriteLine;
+                ninja = context.Ninjas.FirstOrDefault();
+            }
+
+            ninja.ServedInOniwaban = !ninja.ServedInOniwaban;
+
+            using (NinjaContext context=new NinjaContext())
+            {
+                context.Database.Log = Console.WriteLine;
+                context.Ninjas.Attach(ninja);
+                context.Entry(ninja).State = EntityState.Modified;
+                context.SaveChanges();
             }
         }
     }
